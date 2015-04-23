@@ -7,3 +7,13 @@ ajax library
 
 ## usage
 
+```js
+new Ajax({
+    url: 'data.json',
+    type: 'POST'
+}).on('success', function(responseText, xhr){
+
+}).on('error', function(xhr){
+
+})
+```
