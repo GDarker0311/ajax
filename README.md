@@ -1,9 +1,9 @@
 # ajax
 ajax library
 
-## example
+## demo
 
-[here](http://vivaxy.github.io/ajax/example)
+[here](http://vivaxy.github.io/ajax/demo)
 
 ## usage
 
