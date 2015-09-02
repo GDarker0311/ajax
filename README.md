@@ -17,3 +17,11 @@ new Ajax({
 
 })
 ```
+
+## develop
+
+1. npm i
+
+2. git submodule update --init
+
+3. make

@@ -1,1 +1,4 @@
 .idea
+event-emitter
+node_modules
+.DS_Store

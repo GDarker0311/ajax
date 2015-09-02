@@ -1,0 +1,28 @@
+{
+  "name": "ajax",
+  "version": "1.0.0",
+  "description": "ajax library",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivaxy/ajax.git"
+  },
+  "keywords": [
+    "ajax"
+  ],
+  "author": "vivaxy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vivaxy/ajax/issues"
+  },
+  "homepage": "https://github.com/vivaxy/ajax#readme",
+  "dependencies": {
+    "babel": "^5.8.23"
+  }
+}
