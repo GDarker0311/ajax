@@ -11,6 +11,7 @@ class Ajax extends EventEmitter {
         super(arguments);
         this.url = options.url;
         this.type = options.type;
+        this.contentType = options.contentType || 'application/x-www-form-urlencoded; charset=UTF-8';
     }
 
     send(data) {
@@ -35,15 +36,32 @@ class Ajax extends EventEmitter {
             }
         });
         if (this.type && this.type.toUpperCase() === 'POST') {
-            _this.xhr.open('POST', this.url, true);
-            //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-            _this.xhr.send(this._getQueryString(data));
+            this.xhr.open('POST', this.url, true);
+            this.xhr.setRequestHeader('Content-Type', this.contentType);
+            this.xhr.send(this._getQueryString(data));
         } else {
             let a = document.createElement('a');
             a.href = this.url;
-            let url = a.origin + a.pathname + '?' + this._getQueryString(this._mixin(data, {_: new Date().getTime()}));
-            _this.xhr.open('GET', url, true);
-            _this.xhr.send();
+            let search = '';
+            let timestamp = new Date().getTime();
+            switch (typeof data) {
+                case 'undefined': // undefined
+                    search = '_=' + timestamp;
+                    break;
+                case 'string': // string
+                    search = data === '' ? '_=' + timestamp : data + '&_=' + timestamp;
+                    break;
+                case 'object':
+                    search = this._getQueryString(this._mixin(data, {
+                        _: timestamp
+                    }));
+                    break;
+                default:
+                    throw new Error('data type error: not in `undefined`, `string` or `object`');
+            }
+            let url = a.origin + a.pathname + '?' + search;
+            this.xhr.open('GET', url, true);
+            this.xhr.send();
         }
         // this.xhr.timeout = 0;
         return this;
@@ -55,7 +73,9 @@ class Ajax extends EventEmitter {
     }
 
     _getQueryString(data) {
-        if (typeof data === 'string') return data === '' ? '' : '?' + data;
+        if (typeof data === 'string') {
+            return data;
+        }
         let queryString = '';
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -67,7 +87,9 @@ class Ajax extends EventEmitter {
                         throw 'data can not be parsed to queryString';
                     }
                 }
-                queryString += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
+                if (value !== undefined) { // omit undefined key pair
+                    queryString += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
+                }
             }
         }
         return queryString.slice(0, -1);

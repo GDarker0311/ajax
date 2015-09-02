@@ -127,6 +127,7 @@
             _get(Object.getPrototypeOf(Ajax.prototype), 'constructor', this).call(this, arguments);
             this.url = options.url;
             this.type = options.type;
+            this.contentType = options.contentType || 'application/x-www-form-urlencoded; charset=UTF-8';
         }
 
         _createClass(Ajax, [{
@@ -153,15 +154,34 @@
                     }
                 });
                 if (this.type && this.type.toUpperCase() === 'POST') {
-                    _this.xhr.open('POST', this.url, true);
-                    //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-                    _this.xhr.send(this._getQueryString(data));
+                    this.xhr.open('POST', this.url, true);
+                    this.xhr.setRequestHeader('Content-Type', this.contentType);
+                    this.xhr.send(this._getQueryString(data));
                 } else {
                     var a = document.createElement('a');
                     a.href = this.url;
-                    var url = a.origin + a.pathname + '?' + this._getQueryString(this._mixin(data, { _: new Date().getTime() }));
-                    _this.xhr.open('GET', url, true);
-                    _this.xhr.send();
+                    var search = '';
+                    var timestamp = new Date().getTime();
+                    switch (typeof data) {
+                        case 'undefined':
+                            // undefined
+                            search = '_=' + timestamp;
+                            break;
+                        case 'string':
+                            // string
+                            search = data === '' ? '_=' + timestamp : data + '&_=' + timestamp;
+                            break;
+                        case 'object':
+                            search = this._getQueryString(this._mixin(data, {
+                                _: timestamp
+                            }));
+                            break;
+                        default:
+                            throw new Error('data type error: not in `undefined`, `string` or `object`');
+                    }
+                    var url = a.origin + a.pathname + '?' + search;
+                    this.xhr.open('GET', url, true);
+                    this.xhr.send();
                 }
                 // this.xhr.timeout = 0;
                 return this;
@@ -175,7 +195,9 @@
         }, {
             key: '_getQueryString',
             value: function _getQueryString(data) {
-                if (typeof data === 'string') return data === '' ? '' : '?' + data;
+                if (typeof data === 'string') {
+                    return data;
+                }
                 var queryString = '';
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
@@ -187,7 +209,10 @@
                                 throw 'data can not be parsed to queryString';
                             }
                         }
-                        queryString += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
+                        if (value !== undefined) {
+                            // omit undefined key pair
+                            queryString += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
+                        }
                     }
                 }
                 return queryString.slice(0, -1);

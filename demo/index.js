@@ -12,7 +12,7 @@ var ajax = new Ajax({
 }).on('success', function (data) {
     console.log(JSON.parse(data));
 }).on('readystatechange', function (data) {
-    // console.log(data);
+     //console.log(data);
 }).send('name=jack&date=2015-04-03');
 
 ajax.send({
