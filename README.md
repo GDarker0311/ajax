@@ -8,6 +8,7 @@ ajax library
 ## usage
 
 ```js
+import Ajax from `path`;
 new Ajax({
     url: 'data.json',
     type: 'POST'

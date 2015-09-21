@@ -1,5 +1,5 @@
-./dest/ajax.js: ./event-emitter/src/event-emitter.js ./dest
-	./node_modules/.bin/browserify ./src/ajax.js -t babelify --outfile ./dest/ajax.js
+./demo/index.js: ./event-emitter/src/event-emitter.js ./demo/index.jsx
+	./node_modules/.bin/browserify ./demo/index.jsx -t babelify --outfile ./demo/index.js
 
 ./dest:
 	mkdir ./dest
