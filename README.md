@@ -23,6 +23,6 @@ new Ajax({
 
 1. npm i
 
-2. git submodule update --init
+2. `git submodule update --init` (update `git submodule update --remote`)
 
 3. make
