@@ -110,7 +110,6 @@ class Ajax extends EventEmitter {
         }
         return r;
     }
-
 }
 
-export default Ajax;
+window.Ajax = Ajax;
