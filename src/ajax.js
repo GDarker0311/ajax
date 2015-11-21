@@ -25,7 +25,7 @@ class Ajax extends EventEmitter {
              3    LOADING    Downloading; responseText holds partial data.
              4    DONE
              */
-            if (_this.xhr.readyState === 4) {
+            if (_this.xhr.readyState === XMLHttpRequest.DONE) {
                 if (_this.xhr.status >= 200 && _this.xhr.status < 300 || _this.xhr.status === 304) {
                     // 2** is valid response status, and 304 means get from the cache
                     // _this.xhr.responseType
