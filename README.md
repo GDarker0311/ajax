@@ -29,6 +29,8 @@ with webpack-dev-server `> npm run server`
 
 # changelog
 
+- 1.0.2 fix event-emitter not installed when `npm i`
+
 - 1.0.1 use webpack and babel 6
 
 - 1.0.0 initialize
