@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 'use strict';
-import EventEmitter from '../event-emitter/src/event-emitter.js';
+
+import EventEmitter from '../node_modules/event-emitter/src/event-emitter.js';
 
 class Ajax extends EventEmitter {
 

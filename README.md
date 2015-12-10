@@ -1,11 +1,11 @@
 # ajax
 ajax library
 
-## demo
+# demo
 
 [here](http://vivaxy.github.io/ajax/demo)
 
-## usage
+# usage
 
 ```js
 import Ajax from `path`;
@@ -19,10 +19,16 @@ new Ajax({
 })
 ```
 
-## develop
+# develop
 
-1. npm i
+1. `> npm i`
 
-2. `git submodule update --init` (update `git submodule update --remote`)
+2. `> npm run build`
 
-3. make
+with webpack-dev-server `> npm run server`
+
+# changelog
+
+- 1.0.1 use webpack and babel 6
+
+- 1.0.0 initialize

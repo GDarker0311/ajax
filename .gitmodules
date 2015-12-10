@@ -1,4 +1,0 @@
-[submodule "event-emitter"]
-	path = event-emitter
-	url = https://github.com/vivaxy/event-emitter.git
-	branch = gh-pages
