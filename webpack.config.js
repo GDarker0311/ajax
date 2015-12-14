@@ -6,15 +6,15 @@
 
 module.exports = {
     entry: {
-        'demo': './demo/src.js'
+        'demo/index': './src/demo.js'
     },
     output: {
-        filename: './demo/[name].js'
+        filename: './[name].js'
     },
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /src\/.+\.js?$/,
                 loader: 'babel?presets[]=es2015'
             }
         ]

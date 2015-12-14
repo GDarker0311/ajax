@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 'use strict';
-import Ajax from '../src/ajax.js';
+import Ajax from './ajax.js';
 
 let ajax = new Ajax({
     url: 'data.json'
